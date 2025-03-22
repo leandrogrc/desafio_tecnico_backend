@@ -1,67 +1,39 @@
-# Desafio técnico - Proesc
+# DESAFIO PROESC BACKEND
 
+## Problemas solicitados no desafio [corrigidos]
 
-## Sobre o desafio
+### -> É encontrado um erro na página inicial ao tentar navegar para página a "Produtos" ou "Categorias". Realize uma correção na navegação.
 
-Olá, bem vindo(a) ao desafio técnico do Proesc.com! 
+- **Correção:** A rota na view "welcome" estava incorreta. Ela direcionava para "/produtos" e "/categorias", mas as rotas corretas eram "/produtos/listar" e "/categorias/listar"
 
-- Linguagens: PHP **5.6** (Aqui você vai simular um ambiente legado, então pode executar com o artisan ou utilizando o docker se preferir)
-- Framework: Laravel
-- Banco de dados: Postgres
+### -> Um usuário relatou dificuldades ao realizar o cadastro de uma nova categoria. Ao preencher os dados e apertar em "Salvar", mostra a mensagem de sucesso no entanto não é feito o cadastro. Realize uma correção nesse procedimento.
 
+- **Correção:** O formulário de cadastro de uma nova categoria estava usando o método GET ao invés de POST. Alterado no arquivo dentro de "resources/views/categorias/create.blade.php"
 
-### Desafio
+### -> Na página de listagem de Produtos, usuários identificaram que não está sendo exibido o nome da Categoria relacionada. Realize uma correção para exibir o nome correto da categoria vinculada ao produto.
 
-Nesse desafio, usuários relataram alguns problemas no uso de uma simples aplicação.
-Como estágiário(a) da área de desenvolvimento, você deverá realizar uma análise dos problemas relatados e disponibilizar uma correção para normalizar a aplicação.
+- **Correção:** o arquivo em app/models/product.php estava sem a relação do produto com a categoria. Implementado o relacionamento entre as tables do banco de dados através de uma função.
 
-1. É encontrado um erro na página inicial ao tentar navegar para página a "Produtos" ou "Categorias". Realize uma correção na navegação.<br>
-2. Um usuário relatou dificuldades ao realizar o cadastro de uma nova categoria. Ao preencher os dados e apertar em "Salvar", mostra a mensagem de sucesso no entanto não é feito o cadastro. Realize uma correção nesse procedimento<br>
-3. Na página de listagem de Produtos, usuários identificaram que não está sendo exibido o nome da Categoria relacionada. Realize uma correção para exibir o nome correto da categoria vinculada ao produto.<br>
+## Outros problemas encontrados [corrigidos]
 
-### Como executar 
+### -> Alteração no App/Http/Requests/CategoryRequest.php;
 
-Para iniciá-lo, siga os passos abaixo:
+- A descrição da categoria estava sendo salva no slug. Dessa forma, a descrição não era mostrada após a criação de uma categoria. Foi criada uma regra, assim como a existente para produtos;
 
-1 -  Clone o projeto para o seu computador:
-```bash
-$ git clone git@github.com:Equipe-Proesc/desafio_tecnico_backend.git
-```
-Se tiver algum problema pra clonar, verifique se a parte de certificados está atualizada:
+### -> Notificações de criação/exclusão/atualização de categorias/produtos agora aparecem.
 
-```bash
-$ sudo apt-get update
-$ sudo apt-get install apt-transport-https ca-certificates -y 
-$ sudo update-ca-certificates 
-```
+- Ao cliar em excluir um produto/categoria, é exibido uma confirmação para evitar exclusões acidentais (implementado com Javascript)
+- Botão de dismiss para as notificação de criação/exclusão/atualização. (foi adicionado um source script do próprio Boostrap).
 
-2 - Entre na pasta do projeto
-```bash
-$ cd desafio3
-```
-3 - Instale as depêndencias
+### -> Botões de editar/deletar agora estão melhor UI.
 
-```bash
-$ composer install
-```
+- Foram inseridos dentro de um <div> estilizado com bootstrap, que já estava sendo usado nas views.
 
-4 - Crie o arquivo arquivo .env copiando o arquivo [.env.example](./desafio3/.env.example) e configure com as informações do seu banco local
+### -> Função de editar categoria corrigida.
 
+- Criada a rota de uptade para categorias em routes/web.php -> "/categorias/{id}"
+- Os campos de nome e descrição carregam os valores atuais corretamente na página de edição. A alteração é realizada com sucesso e redireciona para categorias/listar, antes redirecionava para produtos/listar, o que era contraintuitivo. Isso também acontecia após criar uma categoria.
 
-5 - Crie uma nova chave para a aplicação
-```bash
-$ php artisan key:generate
-```
+### -> View de editar produto corrigida.
 
-6 - Rode as migrations
-```bash
-$ php artisan migrate
-```
-7 - Rode o seeder
-```bash
-$ php artisan db:seed
-```
-8 - Inicie o projeto:
-```bash
-$ php artisan serve
-```
+- Um erro na variável $product estava impedindo a página de ser renderizada. Ela estava escrita como $produto
