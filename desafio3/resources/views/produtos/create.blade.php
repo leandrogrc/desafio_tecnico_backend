@@ -16,15 +16,11 @@
               @endif
               <div class="form-group">
                 <label for="name" class="form-label mt-4">Nome</label>
-                <input type="text"  id="name" name="name" class="form-control"  placeholder="Digite o nome do produto" required 
-                        value=""
-                >
+                <input type="text"  id="name" name="name" class="form-control"  placeholder="Digite o nome do produto" required value="">
               </div>
               <div class="form-group">
                 <label for="description" class="form-label mt-4">Descrição</label>
-                <textarea class="form-control" id="description" name="description" rows="3"
-                value=""
-                ></textarea>
+                <textarea class="form-control" id="description" name="description" rows="3" value=""></textarea>
               </div>
               <div class="form-group">
                 <label class="form-label mt-4" >Preço</label>

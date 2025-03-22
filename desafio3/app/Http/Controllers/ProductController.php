@@ -31,6 +31,7 @@ class ProductController extends Controller
     $categories = \App\Models\Category::all();
     return view('produtos.create', ['categories' => $categories]);
    }
+
    public function store(ProductRequest $request)
    {
        $product= $this->objProduct->create([
@@ -41,7 +42,7 @@ class ProductController extends Controller
            'description'=>$request->description
        ]);
        if($product){
-           return redirect('produtos/listar');
+           return redirect('produtos/listar')->with('msg', 'Produto criado com sucesso.');;
        }
    }
 
@@ -61,12 +62,12 @@ class ProductController extends Controller
         'category_id'=> $request->category_id,
         'description'=>$request->description
     ]);
-    return redirect('produtos/listar');
+    return redirect('produtos/listar')->with('msg', 'Produto editado com sucesso.');
    }
 
    public function destroy($id)
    {
        $product = $this->objProduct->find($id)->delete();
-       return redirect('produtos/listar')->with('msg', 'Categoria excluída com sucesso.');
+       return redirect('produtos/listar')->with('msg', 'Produto excluído com sucesso.');
    }
 }
